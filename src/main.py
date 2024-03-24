@@ -1,3 +1,4 @@
+import base64
 import io
 import json
 
@@ -83,7 +84,7 @@ def _generate_image(m: Map) -> None:
     img: Image = Image.open(img_bytes)
     img.save('./result_data/result.png')
     with open('./result_data/result.json', 'w', encoding='utf-8') as file:
-        json.dump({'image': str(img_bytes.getvalue())}, file, indent=4, ensure_ascii=False)
+        json.dump({'image': base64.b64encode(img_bytes.getvalue()).decode()}, file, indent=4, ensure_ascii=False)
 
 
 def main() -> None:
